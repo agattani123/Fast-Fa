@@ -30,6 +30,8 @@ async function fetchFromOpenAI(url, payload) {
 
 // Function to generate text using OpenAI GPT-4
 async function generateText(prompt) {
+
+
   const chatUrl = "https://api.openai.com/v1/chat/completions";
   const payload = {
     model: "gpt-4",
@@ -40,6 +42,8 @@ async function generateText(prompt) {
       },
     ],
   };
+
+
 
   const data = await fetchFromOpenAI(chatUrl, payload);
   return data.choices[0].message.content;
