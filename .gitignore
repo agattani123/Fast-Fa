@@ -145,3 +145,6 @@ gen
 
 #fleet
 .fleet
+
+#creds
+creds.js
