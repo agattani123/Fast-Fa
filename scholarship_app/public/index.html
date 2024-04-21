@@ -3,16 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship Application</title>
+    <title>factsfa application</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form id="scholarshipForm" action="/submit-application" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="financial_info" placeholder="Describe your financial situation" required></textarea>
-        <button type="submit">Apply</button>
-    </form>
-
-    <script src="form.js"></script>
+    <div class="container">
+        <header class="para">
+            <h1>facts-fa</h1>
+        </header>
+        <main>
+            <div class="para">
+                <p>sick of FAFSA's tedious application process? <br> 
+                    put in your information below and unlock your future!</p>
+            <div class="para">
+            <form id="scholarshipForm" action="/submit-application" method="POST">
+                <div class="row">
+                    <div class="inputBox">
+                        <input type="text" name="firstName" required="required">
+                        <span>First Name</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="lastName" required="required">
+                        <span>Last Name</span>
+                    </div>
+                </div>
+                <div class="inputBox">
+                    <textarea name="financial_info" required rows="8"></textarea>
+                    <span>Description</span>
+                </div>
+                <button type="submit">Apply</button>
+            </form>
+        </main>
+    </div>
 </body>
 </html>
