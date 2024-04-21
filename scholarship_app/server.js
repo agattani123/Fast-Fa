@@ -60,77 +60,84 @@ app.post('/submit-application', async (req, res) => {
     "The prompt is follows: ${financial_info}`);
 
     console.log('Application Received:', firstName, lastName, financial_info, output);
+// Replace "APPLY" with a button
+const modifiedOutput = output.replace(/APPLY/g, `<button class="apply-btn">Apply</button>`);
 
-    // Send back HTML content
-    res.send(`
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Scholarship Application Results</title>
-      <style>
-          body {
-              font-family: Arial, sans-serif;
-              padding: 20px;
-              text-align: center;
-              background: #f0f0f0;
-          }
-          .container {
-              background: white;
-              border-radius: 10px;
-              padding: 20px;
-              max-width: 600px;
-              margin: 0 auto;
-              box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-          }
-          h1 {
-              color: #333;
-              font-size: 2.5em;
-          }
-          ul.scholarship-list {
-              list-style-type: none; /* Ensures no bullet points are shown */
-              padding: 0;
-              margin: 0;
-          }
-          .scholarship-list li {
-              list-style-type: none;
-              background: #f8f8f8;
-              margin: 10px 0;
-              padding: 15px;
-              border-radius: 5px;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              transition: transform 0.2s ease-in-out;
-          }
-          .scholarship-list li:hover {
-              transform: scale(1.03); /* Slight scale effect on hover */
-              box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-          }
-          button.apply-btn {
-              padding: 8px 16px;
-              background-color: #4CAF50; /* Green background */
-              color: white; /* White text color */
-              border: none;
-              border-radius: 5px;
-              cursor: pointer;
-              text-decoration: none;
-              font-size: 16px;
-          }
-          button.apply-btn:hover {
-              background-color: #45a049; /* Darker green background on hover */
-          }
-      </style>
-  </head>
-  <body>
-      <div class="container">
-          <h1>We got you, ${firstName} :)</h1>
-          <ul class="scholarship-list">${output}</ul>
-      </div>
-  </body>
-  </html>
+res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #3d7ec7, #7f91a9, #4b7c86, #ecf0ef);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
+            height: 100vh;
+            margin: 0;
+            margin-top: 700px;
+            padding-top: 700px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #5b3c88;
+            font-size: 2.5em;
+        }
+        ul.scholarship-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .scholarship-list li {
+            list-style-type: none;
+            background: #f8f8f8;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: midnightblue;
+            opacity: 0.75;
+        }
+        .apply-btn {
+            width: auto;
+            padding: 10px 20px;
+            background-color: #5b3c88;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .apply-btn:hover {
+            background-color: rgb(25, 25, 112);
+            transform: scale(1.05);
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>we got you, ${firstName} :)</h1>
+        <ul class="scholarship-list">${modifiedOutput}</ul>
+    </div>
+</body>
+</html>
 `);
-  
-
 });
 
 app.listen(PORT, () => {
