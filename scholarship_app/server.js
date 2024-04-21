@@ -56,7 +56,7 @@ app.post('/submit-application', async (req, res) => {
     "If a student is from a certain area, you must provide at least one opportunity that is specific to that area and please write this our explicitly." +
     "Please be VERY specific as to which part of the prompt this opportunity addresses. If it is not in the prompt, absolutely do not include that opportunity. Only include opportunities DIRECTLY applicable to the prompt." +
     "It must be very specific to the prompt and tailored directly to it. Give me at least 10 distinct results. Structure the output as follows: I want an HTML list with each opportunity having the fields" +
-    "\"Scholarship\" (Opportunity name), \"Why me?\" (Description of why I am a good fit and what Facets it addresses), \"How much?\" (Prize Amount), and \"Deadline\" (around when should you apply by), and \"APPLY\" (a URL of where to apply). I just want the html do not include any other text before and after (include any quotation marks, i just want the html)" +
+    "\"Scholarship\" (Opportunity name), \"Why me?\" (Description of why I am a good fit and what Facets it addresses), \"How much?\" (Prize Amount), and \"Deadline\" (around when should you apply by), and \"APPLY\" (a URL of where to apply, have the link hyperlinked to APPLY and not in front of a colon). I just want the html do not include any other text before and after (include any quotation marks, i just want the html)" +
     "The prompt is follows: ${financial_info}`);
 
     console.log('Application Received:', firstName, lastName, financial_info, output);
@@ -72,12 +72,10 @@ res.send(`
             font-family: Arial, sans-serif;
             background: linear-gradient(-45deg, #3d7ec7, #7f91a9, #4b7c86, #ecf0ef);
             background-size: 400% 400%;
+            margin-top: 800px
+            padding-top: 800px
             animation: gradient 10s ease infinite;
             height: 100vh;
-            margin: 0;
-            margin-top: 700px;
-            padding-top: 700px;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,6 +88,7 @@ res.send(`
             max-width: 600px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
+            position: relative; /* Ensures positioning context for children */
         }
         h1 {
             color: #5b3c88;
@@ -123,6 +122,29 @@ res.send(`
             background-color: rgb(25, 25, 112);
             transform: scale(1.05);
         }
+        .button-nav:hover {
+          background-color: rgb(25, 25, 112);
+          transform: scale(1.05);
+      }
+        .button-nav {
+            position: fixed; /* Fixed position relative to the viewport */
+            padding: 10px 20px;
+            background-color: rgb(46, 99, 122);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        .home-button {
+            left: 20px; /* Position from the left side */
+            bottom: 20px;
+        }
+        .feedback-button {
+            right: 20px; /* Position from the right side */
+            top: 20px;
+        }
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -131,13 +153,16 @@ res.send(`
     </style>
 </head>
 <body>
+    <button class="button-nav home-button" onclick="location.href='index.html';">Home</button>
+    <button class="button-nav feedback-button" onclick="window.open('https://forms.gle/2KvT9ztjWGgbKuGX9', '_blank');">Feedback</button>
     <div class="container">
-        <h1>we got you, ${firstName} :)</h1>
+        <h1>We got you, ${firstName} :)</h1>
         <ul class="scholarship-list">${modifiedOutput}</ul>
     </div>
 </body>
 </html>
 `);
+
 });
 
 app.listen(PORT, () => {
