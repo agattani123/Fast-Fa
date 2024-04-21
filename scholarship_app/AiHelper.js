@@ -42,36 +42,6 @@ async function OpenAIFetchAPI(prompt) {
   }
 }
 
-function DallEFetchAPI(prompt) {
-  console.log("Connecting to OpenAi Dalle");
-  var dalleUrl = "https://api.openai.com/v1/images/generations";
-  var bearer = "Bearer " + openAiKey;
-  fetch(dalleUrl, {
-    method: "POST",
-    headers: {
-      Authorization: bearer,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "dall-e-2",
-      prompt: prompt,
-      n: 1,
-      size: "256x256",
-    }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      console.log(typeof data);
-      console.log(Object.keys(data));
-      console.log(data["choices"][0].message);
-    })
-    .catch((error) => {
-      console.log("Something bad happened " + error);
-    });
-}
 
-module.exports = { OpenAIFetchAPI, DallEFetchAPI };
+module.exports = { OpenAIFetchAPI };
 

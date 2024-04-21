@@ -1,3 +1,3 @@
 export default {
-    openAiKey: 'Your Open Ai API Key',
+  openAiKey: "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",
 };
