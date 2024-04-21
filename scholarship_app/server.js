@@ -72,14 +72,15 @@ res.send(`
             font-family: Arial, sans-serif;
             background: linear-gradient(-45deg, #3d7ec7, #7f91a9, #4b7c86, #ecf0ef);
             background-size: 400% 400%;
-            margin-top: 800px
-            padding-top: 800px
+            margin: 0
+            padding: 0
             animation: gradient 10s ease infinite;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #333;
+            padding-top: 400px;  /* Increase top padding */
         }
         .container {
             background: white;
@@ -88,7 +89,7 @@ res.send(`
             max-width: 600px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
-            position: relative; /* Ensures positioning context for children */
+            margin-top: 400px;  /* Additional top margin can also help */
         }
         h1 {
             color: #5b3c88;
@@ -156,7 +157,7 @@ res.send(`
     <button class="button-nav home-button" onclick="location.href='index.html';">Home</button>
     <button class="button-nav feedback-button" onclick="window.open('https://forms.gle/2KvT9ztjWGgbKuGX9', '_blank');">Feedback</button>
     <div class="container">
-        <h1>We got you, ${firstName} :)</h1>
+        <h1>we got you, ${firstName} :)</h1>
         <ul class="scholarship-list">${modifiedOutput}</ul>
     </div>
 </body>
