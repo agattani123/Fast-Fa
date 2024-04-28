@@ -34,7 +34,7 @@ Category Winner at Hack Dartmouth 2024 for Best Use of Kintone
 
 ## Devpost
 
-devpost[https://devpost.com/DigvijayBokey?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav]
+[Devpost Link]https://devpost.com/software/fastfa
 
 ## Note:
 All API Keys shown do not work and have been deactivated.
