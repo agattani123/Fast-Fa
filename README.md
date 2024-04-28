@@ -31,3 +31,10 @@ In the future, we plan to expand FastFa! to include more features, such as a mor
 ## Prizes
 
 Category Winner at Hack Dartmouth 2024 for Best Use of Kintone
+
+## Devpost
+
+devpost[https://devpost.com/DigvijayBokey?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav]
+
+## Note:
+All API Keys shown do not work and have been deactivated.
