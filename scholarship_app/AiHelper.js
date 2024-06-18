@@ -52,7 +52,7 @@ async function generateImage(prompt) {
 (async () => {
   try {
     const textPrompt = "Explain quantum mechanics in simple terms";
-    const imagePrompt = "Gay indian girl";
+    const imagePrompt = "Picture of a cute cat";
 
     const textResponse = await generateText(textPrompt);
     console.log("Text Response:", textResponse);
