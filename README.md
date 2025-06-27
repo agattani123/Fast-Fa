@@ -1,7 +1,10 @@
 ## Inspiration
 
-The inspiration for FastFa! came from the tedious and often confusing process of applying for financial aid through traditional means. We wanted to create a solution that simplifies this process, making it more accessible and less daunting for students to access educational opportunities. There are many niche scholarships that are local and specific to one's background (ethnicity, interests) that are incredibly tough to find. Hence, we introduce our central platform, FastFa!
+We built FastFa!—because FAFSA, but fast (and not soul-crushing). The idea came from how absurdly painful it is to find and apply for scholarships. Between the clunky forms, random document uploads, and niche scholarships hidden in internet corners, it felt like applying for money cost more time than it saved.
 
+FastFa! is a web app that uses generative AI to make that process suck less. You put in some info, and it spits out a list of scholarships tailored to your background, interests, and financial situation—no hours of Reddit scrolling required. We even pulled in obscure, local scholarships that most people would never find.
+
+We ended up winning the hackathon, which was great, but honestly, the real win was not having to touch the actual FAFSA form.
 
 ## What it does
 
