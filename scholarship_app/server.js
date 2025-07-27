@@ -11,20 +11,20 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-async function fetchOpenAI(url, payload) {
+async function fetchGemini(url, payload) {
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer sk-gemikey72893789237`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     });
     return response.json();
   } catch (error) {
-    console.error("Error fetching from OpenAI:", error);
-    throw new Error("Failed to fetch from OpenAI API");
+    console.error("Error fetching from Gemini:", error);
+    throw new Error("Failed to fetch from Gemini API");
   }
 }
 
@@ -43,7 +43,7 @@ async function generateText(prompt) {
 
 
 
-  const data = await fetchFromOpenAI(chatUrl, payload);
+  const data = await fetchFromGeminichatUrl, payload);
   return data.choices[0].message.content;
 }
 
