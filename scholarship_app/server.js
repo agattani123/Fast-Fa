@@ -28,10 +28,25 @@ async function fetchOpenAI(url, payload) {
   }
 }
 
+async function fetchGoogleAI(url, payload) {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer google_key`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching from Google:", error);
+    throw new Error("Failed to fetch from Gemini API");
+  }
+}
+
 // Function to generate text using OpenAI GPT-4
 async function generateText(prompt) {
-
-
   const chatUrl = "https://api.openai.com/v1/chat/completions";
   const payload = {
     model: "gpt-4",
