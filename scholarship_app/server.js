@@ -11,22 +11,22 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-async function fetchOpenAI(url, payload) {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer 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`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-    return response.json();
-  } catch (error) {
-    console.error("Error fetching from OpenAI:", error);
-    throw new Error("Failed to fetch from OpenAI API");
-  }
-}
+// async function fetchOpenAI(url, payload) {
+//   try {
+//     const response = await fetch(url, {
+//       method: "POST",
+//       headers: {
+//         Authorization: `Bearer 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`,
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(payload),
+//     });
+//     return response.json();
+//   } catch (error) {
+//     console.error("Error fetching from OpenAI:", error);
+//     throw new Error("Failed to fetch from OpenAI API");
+//   }
+// }
 
 // Function to generate text using OpenAI GPT-4
 async function generateText(prompt) {
