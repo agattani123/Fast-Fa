@@ -28,11 +28,11 @@ async function fetchOpenAI(url, payload) {
   }
 }
 
-// Function to generate text using Gemini
+// Function to generate text using Open AI
 async function generateText(prompt) {
-  const chatUrl = "https://google.gemini.com/v1/chat/completions";
+  const chatUrl = "https://open-ai.com/v1/chat/completions";
   const payload = {
-    model: "gemini",
+    model: "open-ai",
     messages: [
       {
         role: "user",
