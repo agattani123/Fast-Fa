@@ -77,19 +77,19 @@ res.send(`
 <html>
 <head>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(-45deg, #3d7ec7, #7f91a9, #4b7c86, #ecf0ef);
-            background-size: 400% 400%;
-            margin: 0
-            padding: 0
-            animation: gradient 10s ease infinite;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-            padding-top: 400px;  /* Increase top padding */
+        // body {
+        //     font-family: Arial, sans-serif;
+        //     background: linear-gradient(-45deg, #3d7ec7, #7f91a9, #4b7c86, #ecf0ef);
+        //     background-size: 400% 400%;
+        //     margin: 0
+        //     padding: 0
+        //     animation: gradient 10s ease infinite;
+        //     height: 100vh;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     color: #333;
+        //     padding-top: 400px;  /* Increase top padding */
         }
         .container {
             background: white;
