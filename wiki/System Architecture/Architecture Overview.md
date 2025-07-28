@@ -13,15 +13,21 @@ The following file was used as context for generating this wiki page:
 
 FastFa! is a web application designed to simplify the process of finding and applying for scholarships. It leverages OpenAI's GPT-4 model to generate a personalized list of scholarships based on the user's input, such as personal information, financial needs, and interests. The application aims to streamline the scholarship application process, which can often be time-consuming and overwhelming, by providing tailored recommendations and facilitating secure payments through Starknet. Additionally, FastFa! incorporates a feedback system that stores user responses in the Kinstone database.
 
+Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+
 ## Application Architecture
 
 ### Frontend
 
 The frontend of FastFa! is built using HTML, CSS, and JavaScript. It provides a user-friendly interface for users to input their personal information and receive a list of recommended scholarships. The frontend communicates with the backend through API calls to fetch and display the scholarship recommendations.
 
+Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+
 ### Backend
 
 The backend of FastFa! is built using Node.js and Express.js. It serves as the intermediary between the frontend and the OpenAI API, handling the user input and processing it through the GPT-4 model to generate scholarship recommendations. The backend also manages the integration with Starknet for secure payments and the Kinstone database for storing user feedback.
+
+Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
 
 ### Data Flow
 

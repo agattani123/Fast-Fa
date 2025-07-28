@@ -5,146 +5,133 @@ The following files were used as context for generating this wiki page:
 
 - [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
 - [scholarship_app/package.json](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/package.json)
-- [scholarship_app/AiHelper.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/AiHelper.js)
 - [scholarship_app/server.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js)
-- [scholarship_app/public/index.html](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/index.html)
 </details>
 
 # Getting Started
 
 ## Introduction
 
-FastFa! is a web application designed to simplify the process of finding and applying for scholarships. It leverages OpenAI's GPT-4 model to generate a personalized list of scholarships based on the user's input, such as personal information, financial needs, and interests. The application aims to streamline the often tedious and time-consuming task of searching for relevant scholarships, making it easier for students to access financial aid opportunities.
+FastFa! is a web application that aims to simplify the process of finding and applying for scholarships. It leverages OpenAI's GPT-4 model to generate a personalized list of scholarship opportunities based on the user's input, such as their financial situation, interests, and background. The application also integrates with Starknet for secure payment processing, allowing students to receive scholarships directly from institutions.
 
-The application consists of a frontend built with HTML, CSS, and JavaScript, and a backend built with Node.js and Express.js. The backend handles the communication with the OpenAI API, processing the user's input and generating the scholarship list. The frontend provides a user-friendly interface for users to input their information and view the generated scholarship list.
+The core functionality of FastFa! revolves around the "Getting Started" process, where users provide their personal information and financial details. This information is then processed by the application's backend, which communicates with the OpenAI API to generate a tailored list of scholarship opportunities. The generated list is presented to the user, along with relevant details and links to apply for each scholarship.
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+## Application Architecture
 
-## Architecture Overview
-
-The FastFa! application follows a client-server architecture, with the frontend acting as the client and the backend serving as the server. The frontend is responsible for rendering the user interface and handling user interactions, while the backend handles the business logic and communication with external services, such as the OpenAI API.
+FastFa! follows a client-server architecture, with the frontend built using HTML, CSS, and JavaScript, and the backend implemented using Node.js and Express.js. The application's main components and their interactions can be represented by the following diagram:
 
 ```mermaid
 graph TD
-    Client[Client<br>Frontend] -->|HTTP Requests| Server[Server<br>Backend]
-    Server -->|Responses| Client
-    Server -->|API Requests| OpenAI[OpenAI API]
-    OpenAI -->|Responses| Server
+    Client[Client<br>HTML/CSS/JS] -->|HTTP Requests| Server[Server<br>Node.js/Express.js]
+    Server -->|Fetch API| OpenAI[OpenAI API]
+    Server -->|Payment Processing| Starknet[Starknet]
+    Server -->|Feedback Storage| Kintone[Kintone Database]
+    OpenAI -->|Scholarship List| Server
+    Starknet -->|Payment Confirmation| Server
+    Kintone -->|Feedback Data| Server
+    Server -->|Rendered Page| Client
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md), [scholarship_app/package.json](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/package.json)
+Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md), [scholarship_app/server.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js)
 
-## Frontend
+## Server-side Logic
 
-The frontend of FastFa! is built using HTML, CSS, and JavaScript. It provides a user-friendly interface for users to input their personal information, financial needs, and interests. The frontend communicates with the backend via HTTP requests, sending the user's input data and receiving the generated scholarship list in response.
+The server-side logic of FastFa! is implemented in the `server.js` file, which sets up an Express.js server and handles incoming HTTP requests. The main functionality is encapsulated in the `/submit-application` route, which is responsible for processing the user's input and generating the scholarship list.
 
-### Frontend Components
-
-#### User Input Form
-
-The user input form is the primary component of the frontend, allowing users to enter their information. It consists of various input fields, such as name, email, academic details, financial situation, and interests.
+Here's a high-level overview of the server-side flow:
 
 ```mermaid
-graph TD
-    UserInputForm[User Input Form] -->|User Input| BackendServer[Backend Server]
-    BackendServer -->|Scholarship List| UserInputForm
-```
+sequenceDiagram
+    participant Client
+    participant Server
+    participant OpenAI
+    participant Starknet
+    participant Kintone
 
-Sources: [scholarship_app/public/index.html](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/index.html)
-
-#### Scholarship List Display
-
-The scholarship list display component is responsible for rendering the list of scholarships generated by the backend. It receives the scholarship data from the backend and presents it in a user-friendly format, such as a list or cards.
-
-```mermaid
-graph TD
-    BackendServer[Backend Server] -->|Scholarship List| ScholarshipListDisplay[Scholarship List Display]
-    ScholarshipListDisplay -->|Render| UserInterface[User Interface]
-```
-
-Sources: [scholarship_app/public/index.html](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/index.html)
-
-## Backend
-
-The backend of FastFa! is built using Node.js and Express.js. It handles the communication with the OpenAI API, processes the user's input data, and generates the scholarship list based on the AI model's response.
-
-### Backend Components
-
-#### Server
-
-The server component is the entry point of the backend application. It sets up the Express.js server, defines the API routes, and handles incoming HTTP requests from the frontend.
-
-```mermaid
-graph TD
-    FrontendClient[Frontend Client] -->|HTTP Request| Server[Server]
-    Server -->|Response| FrontendClient
-    Server -->|Process Request| AiHelper[AI Helper]
-    AiHelper -->|Scholarship List| Server
+    Client->>Server: POST /submit-application
+    Server->>OpenAI: Fetch(chatUrl, payload)
+    OpenAI-->>Server: Scholarship List
+    Server->>Starknet: Payment Processing
+    Starknet-->>Server: Payment Confirmation
+    Server->>Kintone: Store Feedback
+    Kintone-->>Server: Feedback Data
+    Server-->>Client: Rendered HTML Page
 ```
 
 Sources: [scholarship_app/server.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js)
 
-#### AI Helper
+### OpenAI Integration
 
-The AI Helper component is responsible for communicating with the OpenAI API and processing the user's input data. It sends a request to the OpenAI API with the user's information and receives a response containing the generated scholarship list. The AI Helper then processes the response and formats the data for the server to send back to the frontend.
+The `generateText` function in `server.js` is responsible for communicating with the OpenAI API. It takes a prompt as input, which is constructed based on the user's financial information, and sends a POST request to the OpenAI chat completion endpoint. The response from the API is then parsed and returned as the generated scholarship list.
 
-```mermaid
-sequenceDiagram
-    participant Frontend
-    participant Server
-    participant AiHelper
-    participant OpenAI
+```javascript
+async function generateText(prompt) {
+  const chatUrl = "https://open-ai.com/v1/chat/completions";
+  const payload = {
+    model: "open-ai",
+    messages: [
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  };
 
-    Frontend->>Server: User Input Data
-    Server->>AiHelper: Process User Input
-    AiHelper->>OpenAI: API Request with User Input
-    OpenAI-->>AiHelper: Scholarship List Response
-    AiHelper-->>Server: Processed Scholarship List
-    Server-->>Frontend: Scholarship List
+  const data = await fetchFromGemini(chatUrl, payload);
+  return data.choices[0].message.content;
+}
 ```
 
-Sources: [scholarship_app/AiHelper.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/AiHelper.js)
+Sources: [scholarship_app/server.js:23-35](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js#L23-L35)
 
-## Data Flow
+### Starknet Integration
 
-The data flow in the FastFa! application follows a straightforward sequence:
+The application integrates with Starknet for secure payment processing, allowing students to receive scholarships directly from institutions. However, the specific implementation details of this integration are not provided in the given source files.
 
-1. The user inputs their personal information, financial needs, and interests into the frontend form.
-2. The frontend sends an HTTP request to the backend server with the user's input data.
-3. The backend server receives the request and passes the user's input data to the AI Helper component.
-4. The AI Helper component formats the user's input data and sends a request to the OpenAI API.
-5. The OpenAI API processes the request and generates a list of scholarships based on the user's input.
-6. The OpenAI API sends the scholarship list response back to the AI Helper component.
-7. The AI Helper component processes the response and formats the scholarship list data.
-8. The AI Helper component sends the processed scholarship list data back to the backend server.
-9. The backend server sends the scholarship list data as a response to the frontend.
-10. The frontend receives the scholarship list data and renders it in the user interface.
+### Kintone Integration
 
-```mermaid
-graph TD
-    UserInput[User Input] -->|1. User Input Data| Frontend[Frontend]
-    Frontend -->|2. HTTP Request| BackendServer[Backend Server]
-    BackendServer -->|3. Process Request| AiHelper[AI Helper]
-    AiHelper -->|4. API Request| OpenAI[OpenAI API]
-    OpenAI -->|5. Scholarship List Response| AiHelper
-    AiHelper -->|6. Processed Data| BackendServer
-    BackendServer -->|7. Response| Frontend
-    Frontend -->|8. Render| UserInterface[User Interface]
+FastFa! stores user feedback in the Kintone database system. The `server.js` file includes a reference to the Kintone integration, but the implementation details are not provided in the given source files.
+
+## Frontend and User Interface
+
+The frontend of FastFa! is built using HTML, CSS, and JavaScript. The main user interface is rendered as an HTML page, which is dynamically generated on the server-side and sent to the client.
+
+The rendered HTML page includes the following key elements:
+
+- A container div with a heading and an unordered list to display the generated scholarship opportunities.
+- Each scholarship opportunity is represented as a list item (`<li>`) with the following fields:
+  - Scholarship name
+  - "Why me?" description
+  - Prize amount
+  - Deadline
+  - "Apply" button (rendered as a hyperlink)
+- The page also includes two navigation buttons:
+  - A "Home" button that redirects the user to the `index.html` page.
+  - A "Feedback" button that opens a feedback form in a new window.
+
+The page is styled with CSS, including a gradient background animation and responsive design elements. The "Apply" buttons are styled with hover effects and a distinct color scheme.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS styles */
+    </style>
+</head>
+<body>
+    <button class="button-nav home-button" onclick="location.href='index.html';">Home</button>
+    <button class="button-nav feedback-button" onclick="window.open('https://forms.gle/2KvT9ztjWGgbKuGX9', '_blank');">Feedback</button>
+    <div class="container">
+        <h1>we got you, ${firstName} :)</h1>
+        <ul class="scholarship-list">${modifiedOutput}</ul>
+    </div>
+</body>
+</html>
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md), [scholarship_app/AiHelper.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/AiHelper.js), [scholarship_app/server.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js)
-
-## Dependencies
-
-The FastFa! application relies on the following dependencies:
-
-| Dependency   | Description                                                  |
-|--------------|--------------------------------------------------------------|
-| Express.js   | A web application framework for Node.js                     |
-| Body-Parser  | A middleware for parsing incoming request bodies in Node.js |
-
-Sources: [scholarship_app/package.json](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/package.json)
+Sources: [scholarship_app/server.js:104-181](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js#L104-L181)
 
 ## Conclusion
 
-FastFa! is a web application that aims to simplify the process of finding and applying for scholarships by leveraging OpenAI's GPT-4 model. It provides a user-friendly interface for users to input their personal information, financial needs, and interests, and generates a personalized list of scholarships based on the AI model's response. The application follows a client-server architecture, with a frontend built using HTML, CSS, and JavaScript, and a backend built using Node.js and Express.js. By streamlining the scholarship search process, FastFa! aims to make it easier for students to access financial aid opportunities and reduce the time and effort required to find relevant scholarships.
+FastFa! is a web application that aims to simplify the process of finding and applying for scholarships by leveraging OpenAI's GPT-4 model and integrating with Starknet for secure payment processing. The application follows a client-server architecture, with the server-side logic implemented using Node.js and Express.js, and the frontend built with HTML, CSS, and JavaScript. The core functionality revolves around the "Getting Started" process, where users provide their personal and financial information, which is then used to generate a tailored list of scholarship opportunities.

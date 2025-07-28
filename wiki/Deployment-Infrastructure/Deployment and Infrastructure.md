@@ -3,7 +3,7 @@
 
 The following file was used as context for generating this wiki page:
 
-- [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+- [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)
 
 </details>
 
@@ -11,11 +11,11 @@ The following file was used as context for generating this wiki page:
 
 ## Introduction
 
-FastFa! is a web application that aims to simplify the process of finding and applying for scholarships. It utilizes OpenAI's GPT-4 model to generate a personalized list of scholarships based on the user's input. The application also integrates with Starknet for secure payment processing and Kintone for storing user feedback. This wiki page focuses on the deployment and infrastructure aspects of the FastFa! project.
+The FastFa! project is a web application designed to simplify the process of finding and applying for scholarships. It utilizes OpenAI's GPT-4 model to generate personalized scholarship recommendations based on user input. The application also integrates with Starknet for secure payment processing and Kintone for storing user feedback. This section focuses on the deployment and infrastructure aspects of the FastFa! project.
 
 ## Architecture Overview
 
-FastFa! follows a client-server architecture, with a Node.js and Express.js backend and a frontend built with HTML, CSS, and JavaScript. The application interacts with the OpenAI API to generate scholarship recommendations, and it integrates with Starknet for payment processing and Kintone for storing user feedback.
+FastFa! follows a client-server architecture, with a Node.js and Express.js backend and a frontend built with HTML, CSS, and JavaScript. The application interacts with the OpenAI API to generate scholarship recommendations, integrates with Starknet for payment processing, and utilizes Kintone for storing user feedback.
 
 ```mermaid
 graph TD
@@ -25,15 +25,15 @@ graph TD
     Server -->|Feedback Storage| Kintone[Kintone]
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+Sources: [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)
 
 ## Backend
 
-The FastFa! backend is built using Node.js and Express.js. It handles the communication with the OpenAI API, Starknet, and Kintone.
+The FastFa! backend is built using Node.js and Express.js, handling communication with the OpenAI API, Starknet, and Kintone.
 
 ### OpenAI Integration
 
-The backend uses the `fetch` API to make requests to the OpenAI API and process the responses. The responses from the OpenAI API are used to generate the list of scholarships tailored to the user's input.
+The backend utilizes the `fetch` API to make requests to the OpenAI API and process the responses. These responses are used to generate the list of scholarships tailored to the user's input.
 
 ```mermaid
 sequenceDiagram
@@ -47,11 +47,11 @@ sequenceDiagram
     Server-->>Client: Scholarship list
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+Sources: [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)
 
 ### Starknet Integration
 
-The backend integrates with Starknet to handle secure payment processing. This allows students to receive scholarships directly from the institutions.
+The backend integrates with Starknet to handle secure payment processing, allowing students to receive scholarships directly from institutions.
 
 ```mermaid
 sequenceDiagram
@@ -65,11 +65,11 @@ sequenceDiagram
     Server-->>Client: Payment status
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+Sources: [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)
 
 ### Kintone Integration
 
-The backend stores user feedback in the Kintone database system. This integration allows the FastFa! team to collect and analyze user feedback for future improvements.
+The backend stores user feedback in the Kintone database system, allowing the FastFa! team to collect and analyze feedback for future improvements.
 
 ```mermaid
 sequenceDiagram
@@ -83,15 +83,15 @@ sequenceDiagram
     Server-->>Client: Feedback confirmation
 ```
 
-Sources: [README.md](https://github.com/agattani123/Fast-Fa/blob/master/README.md)
+Sources: [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)
 
 ## Frontend
 
-The FastFa! frontend is built with HTML, CSS, and JavaScript. It provides a user-friendly interface for users to input their information and receive a list of personalized scholarship recommendations.
+The FastFa! frontend is built with HTML, CSS, and JavaScript, providing a user-friendly interface for users to input information and receive personalized scholarship recommendations.
 
 ### User Input
 
-The frontend collects user input through a form or a series of input fields. This information is then sent to the backend for processing.
+The frontend collects user input through a form or a series of input fields, which is then sent to the backend for processing.
 
 ### Scholarship Display
 
@@ -99,11 +99,11 @@ The frontend receives the list of scholarship recommendations from the backend a
 
 ### Payment Integration
 
-The frontend integrates with the Starknet payment processing system, allowing users to securely make payments for scholarship applications or other related services.
+The frontend integrates with the Starknet payment processing system, allowing users to securely make payments for scholarship applications or related services.
 
 ### Feedback Form
 
-The frontend includes a feedback form that allows users to provide feedback about their experience with FastFa!. This feedback is then sent to the backend and stored in the Kintone database.
+The frontend includes a feedback form that enables users to provide feedback about their experience with FastFa!. This feedback is sent to the backend and stored in the Kintone database.
 
 ## Deployment
 
@@ -111,4 +111,6 @@ The FastFa! application can be deployed on various cloud platforms or servers. T
 
 ## Conclusion
 
-FastFa! is a web application that aims to simplify the scholarship application process by leveraging AI and integrating with various third-party services. The deployment and infrastructure of the application involve a client-server architecture, with a Node.js and Express.js backend, a frontend built with HTML, CSS, and JavaScript, and integrations with OpenAI, Starknet, and Kintone. The application can be deployed on various cloud platforms or servers, ensuring scalability and accessibility for users.
+FastFa! is a web application designed to simplify the scholarship application process by leveraging AI and integrating with various third-party services. The deployment and infrastructure of the application involve a client-server architecture, with a Node.js and Express.js backend, a frontend built with HTML, CSS, and JavaScript, and integrations with OpenAI, Starknet, and Kintone. The application can be deployed on various cloud platforms or servers, ensuring scalability and accessibility for users.
+
+Sources: [wiki/Deployment-Infrastructure/Deployment and Infrastructure.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Deployment-Infrastructure/Deployment and Infrastructure.md)

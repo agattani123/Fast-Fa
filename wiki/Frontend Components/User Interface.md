@@ -3,8 +3,11 @@
 
 The following files were used as context for generating this wiki page:
 
+- [wiki/Frontend Components/User Interface.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Frontend Components/User Interface.md)
 - [scholarship_app/public/index.html](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/index.html)
 - [scholarship_app/public/style.css](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/style.css)
+- [scholarship_app/public/form.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/form.js)
+- [scholarship_app/public/script.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/script.js)
 
 </details>
 
@@ -14,9 +17,9 @@ The following files were used as context for generating this wiki page:
 
 The "User Interface" component of the Fast-Fa scholarship application project is a web-based form that allows users to input their personal and financial information to apply for scholarships. It provides a simple and user-friendly interface for users to enter their first and last names, as well as a description of their financial situation.
 
-The user interface is built using HTML, CSS, and potentially JavaScript (although no JavaScript file is provided in the given source files). The HTML file (`index.html`) defines the structure of the page, including the form elements and input fields, while the CSS file (`style.css`) handles the styling and layout of the user interface.
+The user interface is built using HTML, CSS, and JavaScript. The HTML file (`index.html`) defines the structure of the page, including the form elements and input fields, while the CSS file (`style.css`) handles the styling and layout of the user interface. The JavaScript files (`form.js` and `script.js`) handle form submission and client-side interactivity.
 
-Sources: [scholarship_app/public/index.html](), [scholarship_app/public/style.css]()
+Sources: [scholarship_app/public/index.html](), [scholarship_app/public/style.css](), [scholarship_app/public/form.js](), [scholarship_app/public/script.js]()
 
 ## Page Structure
 
@@ -81,6 +84,60 @@ Sources: [scholarship_app/public/index.html:22-33]()
 ```
 
 Sources: [scholarship_app/public/index.html:34]()
+
+## Form Submission
+
+The form submission is handled by JavaScript code in the `form.js` and `script.js` files.
+
+### Form.js
+
+The `form.js` file contains an event listener that listens for the `submit` event on the `scholarshipForm`. When the form is submitted, the event is prevented from its default behavior, and the form data is sent to the `/submit-application` endpoint using the `fetch` API.
+
+```javascript
+document.getElementById('scholarshipForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    fetch('/submit-application', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.text())
+      .then(data => alert(data));
+});
+```
+
+Sources: [scholarship_app/public/form.js:1-8]()
+
+### Script.js
+
+The `script.js` file contains another event listener for the `submit` event on the `scholarshipForm`. This event listener also prevents the default form submission behavior and sends the form data to the `/submit-application` endpoint using the `fetch` API. However, it sends the data as a JSON object instead of using `FormData`.
+
+```javascript
+document.getElementById('scholarshipForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const firstName = document.querySelector('input[name="firstName"]').value;
+    const lastName = document.querySelector('input[name="lastName"]').value;
+    const financial_info = document.querySelector('textarea[name="financial_info"]').value;
+
+    fetch('/submit-application', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstName, lastName, financial_info }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Display the response from the server
+        console.log(data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+```
+
+Sources: [scholarship_app/public/script.js:15-28]()
 
 ## Styling
 
@@ -217,6 +274,6 @@ Sources: [scholarship_app/public/style.css:4-5,84-90]()
 
 ## Conclusion
 
-The "User Interface" component of the Fast-Fa scholarship application project provides a clean and modern form for users to input their personal and financial information. The HTML structure defines the form elements, while the CSS styles enhance the visual appearance and user experience. The user interface is designed to be user-friendly, with clear labels, input validation, and a visually appealing layout.
+The "User Interface" component of the Fast-Fa scholarship application project provides a clean and modern form for users to input their personal and financial information. The HTML structure defines the form elements, while the CSS styles enhance the visual appearance and user experience. The JavaScript files handle form submission and client-side interactivity. The user interface is designed to be user-friendly, with clear labels, input validation, and a visually appealing layout.
 
-Sources: [scholarship_app/public/index.html](), [scholarship_app/public/style.css]()
+Sources: [scholarship_app/public/index.html](), [scholarship_app/public/style.css](), [scholarship_app/public/form.js](), [scholarship_app/public/script.js]()

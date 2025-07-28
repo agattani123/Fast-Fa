@@ -4,6 +4,8 @@
 The following files were used as context for generating this wiki page:
 
 - [scholarship_app/server.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/server.js)
+- [scholarship_app/creds.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/creds.js)
+- [wiki/Backend Systems/Server-side Components.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Backend Systems/Server-side Components.md)
 
 </details>
 
@@ -11,9 +13,11 @@ The following files were used as context for generating this wiki page:
 
 ## Introduction
 
-The server-side components of this project are responsible for handling incoming HTTP requests, generating personalized scholarship recommendations based on user input, and rendering dynamic HTML responses. The core functionality is implemented using Node.js and the Express.js framework.
+The server-side components of this project are responsible for handling incoming HTTP requests, generating personalized scholarship recommendations based on user input, and rendering dynamic HTML responses. The core functionality is implemented using Node.js and the Express.js framework, with integration to the OpenAI API for generating tailored recommendations.
 
-The main server-side component is the `server.js` file, which sets up an Express.js server and defines the necessary routes and request handlers. The server listens on port 3000 and serves static files from the `public` directory. Additionally, it integrates with the OpenAI API to generate tailored scholarship recommendations based on the user's financial information.
+The main server-side component is the `server.js` file, which sets up an Express.js server, defines routes and request handlers, and handles the submission of scholarship applications. The server listens on port 3000 and serves static files from the `public` directory. Additionally, it utilizes the `creds.js` file to store the OpenAI API key securely.
+
+Sources: [scholarship_app/server.js](), [scholarship_app/creds.js](), [wiki/Backend Systems/Server-side Components.md]()
 
 ## Express.js Server Setup
 
@@ -75,7 +79,7 @@ The server integrates with the OpenAI API to generate personalized scholarship r
 
 ### Fetching from OpenAI API
 
-The `fetchOpenAI` function is an asynchronous function that sends a POST request to the OpenAI API with the provided payload. It returns the response data as JSON:
+The `fetchOpenAI` function is an asynchronous function that sends a POST request to the OpenAI API with the provided payload. It retrieves the OpenAI API key from the `creds.js` file and includes it in the request headers. The function returns the response data as JSON:
 
 ```javascript
 async function fetchOpenAI(url, payload) {
@@ -83,7 +87,7 @@ async function fetchOpenAI(url, payload) {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer ${creds.openAiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
@@ -96,7 +100,7 @@ async function fetchOpenAI(url, payload) {
 }
 ```
 
-Sources: [scholarship_app/server.js:14-24]()
+Sources: [scholarship_app/server.js:14-24](), [scholarship_app/creds.js]()
 
 ### Generating Text with OpenAI
 
@@ -115,7 +119,7 @@ async function generateText(prompt) {
     ],
   };
 
-  const data = await fetchFromOpenAI(chatUrl, payload);
+  const data = await fetchOpenAI(chatUrl, payload);
   return data.choices[0].message.content;
 }
 ```

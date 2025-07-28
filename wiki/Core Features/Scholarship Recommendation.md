@@ -3,6 +3,7 @@
 
 The following files were used as context for generating this wiki page:
 
+- [wiki/Core Features/Scholarship Recommendation.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Core Features/Scholarship Recommendation.md)
 - [scholarship_app/AiHelper.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/AiHelper.js)
 - [scholarship_app/public/form.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/form.js)
 - [scholarship_app/public/script.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/public/script.js)

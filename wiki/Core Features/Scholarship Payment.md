@@ -3,6 +3,7 @@
 
 The following files were used as context for generating this wiki page:
 
+- [wiki/Core Features/Scholarship Payment.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Core%20Features/Scholarship%20Payment.md)
 - [scholarship_app/transferTokens.js](https://github.com/agattani123/Fast-Fa/blob/master/scholarship_app/transferTokens.js)
 
 </details>
@@ -14,6 +15,8 @@ The following files were used as context for generating this wiki page:
 The "Scholarship Payment" feature is a crucial component of the project, enabling the transfer of tokens from a designated scholarship address to student recipients. This functionality is implemented in the `transferTokens.js` file, which utilizes the StarkNet library to interact with a smart contract deployed on the StarkNet network.
 
 The primary purpose of this feature is to facilitate the distribution of scholarship funds to eligible students in the form of tokens. By automating the token transfer process, the system streamlines the management and disbursement of scholarships, ensuring transparency and efficiency.
+
+Sources: [wiki/Core Features/Scholarship Payment.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Core%20Features/Scholarship%20Payment.md)
 
 ## Configuration and Setup
 
@@ -149,6 +152,52 @@ In this example, the `senderPrivateKey` and `senderAddress` represent the schola
 
 Sources: [scholarship_app/transferTokens.js:38-42]()
 
+## Sequence Diagram
+
+The following sequence diagram illustrates the flow of the token transfer process:
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant TransferTokens
+    participant SenderAccount
+    participant Contract
+    participant Provider
+    participant StarkNet
+
+    Client->>TransferTokens: transferTokens(senderPrivateKey, senderAddress, recipientAddress, amount)
+    TransferTokens->>TransferTokens: Load contract ABI
+    TransferTokens->>Contract: Instantiate Contract
+    TransferTokens->>SenderAccount: Instantiate SenderAccount
+    SenderAccount->>Contract: invoke('transfer', [recipientAddress, amount])
+    Contract->>Provider: Submit transaction
+    Provider->>StarkNet: Submit transaction
+    StarkNet-->>Provider: Transaction hash
+    Provider-->>Contract: Transaction hash
+    Contract-->>SenderAccount: Transaction hash
+    SenderAccount-->>TransferTokens: Transaction hash
+    TransferTokens->>Provider: waitForTransaction(transaction_hash)
+    Provider->>StarkNet: Wait for transaction confirmation
+    StarkNet-->>Provider: Transaction confirmed
+    Provider-->>TransferTokens: Transaction confirmed
+    TransferTokens-->>Client: Transfer completed successfully
+```
+
+This diagram illustrates the interactions between the client, the `transferTokens` function, the `SenderAccount` instance, the `Contract` instance, the `Provider`, and the StarkNet network during the token transfer process.
+
+1. The client invokes the `transferTokens` function with the necessary parameters.
+2. The `transferTokens` function loads the contract ABI and instantiates the `Contract` and `SenderAccount` instances.
+3. The `SenderAccount` invokes the `transfer` method on the `Contract` instance, passing the recipient address and the amount of tokens to be transferred.
+4. The `Contract` instance submits the transaction to the `Provider`.
+5. The `Provider` submits the transaction to the StarkNet network and receives a transaction hash.
+6. The transaction hash is propagated back to the `transferTokens` function.
+7. The `transferTokens` function waits for the transaction to be confirmed on the StarkNet network using the `waitForTransaction` method of the `Provider`.
+8. Once the transaction is confirmed, the `transferTokens` function notifies the client that the transfer was completed successfully.
+
+Sources: [scholarship_app/transferTokens.js]()
+
 ## Conclusion
 
 The "Scholarship Payment" feature implemented in the `transferTokens.js` file provides a streamlined and automated process for transferring tokens from a designated scholarship account to student recipients. By leveraging the StarkNet library and interacting with a deployed smart contract, the system ensures secure and transparent token transfers, facilitating the efficient management and distribution of scholarship funds.
+
+Sources: [wiki/Core Features/Scholarship Payment.md](https://github.com/agattani123/Fast-Fa/blob/master/wiki/Core%20Features/Scholarship%20Payment.md)
